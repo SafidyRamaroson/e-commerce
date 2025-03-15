@@ -68,7 +68,8 @@ const config: Config = {
   		},
   		fontFamily: {
   			roboto: [
-  				'var(--font-roboto)'
+  				'var(--font-roboto)',
+				'sans-serif'
   			]
   		},
   		keyframes: {

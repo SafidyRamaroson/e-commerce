@@ -19,23 +19,28 @@ enum Role {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String
-  password  String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int       @id @default(autoincrement())
+  email           String    @unique
+  firstName       String?
+  lastName        String?
+  password        String?
+  isEmailVerified Boolean   @default(false)
+  otpCode         Int?
+  expiredCodeAt   DateTime?
+  role            Role      @default(USER)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
   cart   Cart?
   orders Order[]
 }
 
 model Category {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?  @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   // Relations
   products Product[]
@@ -45,17 +50,31 @@ model Product {
   id               Int      @id @default(autoincrement())
   name             String   @unique
   description      String
-  price            Float
-  image            String?
+  price            Decimal  @db.Decimal(10, 2)
   stock            Int      @default(0)
-  minimumThreshold Int
+  minimumThreshold Int      @default(10)
   categoryId       Int?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  category   Category?   @relation(fields: [categoryId], references: [id])
+  category   Category?      @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   cartItems  CartItem[]
   orderItems OrderItem[]
+  media      ProductMedia[]
+}
+
+model ProductMedia {
+  id                Int    @id @default(autoincrement())
+  public_id         String
+  format            String
+  resource_type     String
+  original_filename String
+  type              String
+  productId         Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Cart {

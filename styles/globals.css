@@ -6,7 +6,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -15,9 +14,9 @@ body {
     --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-    --primary: 262.1 83.3% 57.8%;
+    --primary: 258, 83%, 45%;
     --primary-foreground: 210 20% 98%;
-    --secondary: 220 14.3% 95.9%;
+    --secondary: 260.1 89.9% 66.3%;
     --secondary-foreground: 220.9 39.3% 11%;
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
@@ -37,23 +36,24 @@ body {
 
      /* --sidebar-background: 0 0% 98%;  */
     /* Couleur de fond du sidebar */
-    --sidebar-background: 258, 83%, 45%;
+    /* --sidebar-background: 258, 83%, 45%; */
+    --sidebar-background: 210, 27%, 95%;
 
     /* --sidebar-foreground: 240 5.3% 26.1%; */
     /* Couleur de texte par defaut dans le sidebar */
-    --sidebar-foreground: 120, 14%, 97%;
+    --sidebar-foreground: 0, 0%, 10%;
 
     --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
 
     /* Utiliser pour background lors de survol de chaque bouton dans le sidebar */
-    --sidebar-accent: 220 14.3% 95.9%;
+    --sidebar-accent: 237, 85%, 84%;
 
     /* Utiliser pour le couleur de texte lors de survol de chaque bouton dans le sidebar */
     --sidebar-accent-foreground: 220.9 39.3% 11%;
 
     /* Couleur de la bordure du sidebar */
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 0 0% 100%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -98,6 +98,19 @@ body {
 @layer base {
   * {
     @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+/* ---break---  */
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;

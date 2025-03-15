@@ -13,9 +13,6 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { cn } from "@/lib/utils";
-import AppLogo from "@/components/atoms/shared/AppLogo";
-
 
 type Item = {
   title: string;
@@ -36,14 +33,14 @@ export function AppSidebar({ navMain, ...props }: React.ComponentProps<typeof Si
     setIsCollapsed(state == "collapsed");
   }, [state]);
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" {...props} className="bg-slate-100">
       <SidebarHeader className="mt-4">
         <div className="flex flex-row gap-2 items-center">
 
-          {!isCollapsed && <p className="text-wrap text-slate-100 text-2xl w-full text-center my-4">InnoShop</p>}
+          {!isCollapsed && <p className="text-wrap text-violet-600 text-2xl w-full text-center my-4">InnoShop</p>}
         </div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="mt-4">
         <NavMain items={navMain} />
       </SidebarContent>
       <SidebarFooter>

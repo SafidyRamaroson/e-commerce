@@ -9,7 +9,6 @@ import {
 
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -55,29 +54,50 @@ export function NavMain({
               className="group/collapsible"
             >
               <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton 
-                    tooltip={item.title}
-                    className={`${isCollapsed() && isSubItemActive ? "bg-violet-500 rounded-md" : ""}`}
-                  >
-                    {item.icon && <item.icon />}
-                    <span>{item.title}</span>
-                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {item.items?.map((subItem) => (
-                      <SidebarMenuSubItem key={subItem.title} className={`${subItem.url === currentPath ? "bg-violet-500 rounded-md" : ""}`}>
-                        <SidebarMenuSubButton asChild>
-                          <Link href={subItem.url}>
-                            <span>{subItem.title}</span>
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
+                {
+                  item.items?.length != 0 ? (
+                    <>
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton
+                          tooltip={item.title}
+                          className={`${isCollapsed() && isSubItemActive ? "bg-violet-300 rounded-md" : ""}`}
+                        >
+                          {item.icon && <item.icon />}
+                          <span>{item.title}</span>
+                          <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                        </SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <SidebarMenuSub>
+                          {item.items?.map((subItem) => (
+                            <SidebarMenuSubItem
+                              key={subItem.title}
+                              className={`${subItem.url === currentPath ? "bg-violet-300 rounded-md" : ""}`}
+                            >
+                              <SidebarMenuSubButton
+                                asChild>
+                                <Link href={subItem.url}>
+                                  <span>{subItem.title}</span>
+                                </Link>
+                              </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                          ))}
+                        </SidebarMenuSub>
+                      </CollapsibleContent>
+                    </>
+                  ) : (
+                    <Link href={item.url} >
+                      <SidebarMenuButton
+                        tooltip={item.title}
+                        className={`${item.url === currentPath ? "bg-violet-300 rounded-md" : ""}`}
+                      >
+                        {item.icon && <item.icon />}
+                        <span>{item.title}</span>
+                      </SidebarMenuButton>
+                    </Link>
+                  )
+                }
+
               </SidebarMenuItem>
             </Collapsible>
           );

@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono , Roboto} from "next/font/google";
+import {  Roboto } from "next/font/google";
 import "@/styles/globals.css";
+import QueryProvider from "../providers/QueryProvider";
+import { Toaster } from "@/components/ui/toaster";
+import { LayoutProps } from "@/types/layoutTypes";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+{/**Style for react slick (carousel) */}
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
-  weight: ["400","500","700"]
+  weight: ["400", "500", "700"],
+
+  display: "swap"
 })
+
 
 export const metadata: Metadata = {
   title: "E-commerce",
@@ -25,15 +26,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<LayoutProps>) {
   return (
     <html lang="en">
+
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
+        className={`${roboto.variable} antialiased`}
       >
-        {children}
+        <QueryProvider>{children}</QueryProvider>
+        <Toaster />
       </body>
     </html>
   );

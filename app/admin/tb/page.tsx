@@ -1,0 +1,12 @@
+"use client";
+
+
+function DashboardPage(){
+    return(
+        <div>
+            <h1>Statistiques</h1>
+        </div>
+    )
+}
+
+export default DashboardPage;
